@@ -1,30 +1,31 @@
 import React from 'react'
 
-class Tweet extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: '',
-      username: '',
-      id: '',
-    };
 
+
+class Tweet extends React.Component {
+  // set this.props to variables
+  get id() {  return this.props.id; }
+  get message() { return this.props.message; }
+  get username() { return this.props.username; }
+
+  componentDidMount() {
+    console.log('this.props', this.props);
   }
 
+
   render() {
-    const { message, username, id } = this.state;
 
     return (
       <React.Fragment>
-        <div id={id} className="tweet border border-primary rounded shadow mb-3">
+        <div key={this.id} id={this.id} className="tweet border border-primary rounded shadow mb-3">
           <div className="tweet-content bg-light">
             <div className="user-field">
-              <a className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{username}</a>
+              <a className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{this.username}</a>
               <br />
-              <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{username}</a>
+              <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{this.username}</a>
             </div>
             <div className="tweet-field">
-              <p className="tweet-content ps-2">{message}</p>
+              <p className="tweet-content ps-2">{this.message}</p>
             </div>
             <div className='delete-button btn m-2 btn-outline-danger' >Delete</div>
           </div>

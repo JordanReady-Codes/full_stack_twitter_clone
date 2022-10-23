@@ -8,9 +8,6 @@ class Feedbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      message: '',
-      id: '',
       tweets: []
     };
   }
@@ -27,25 +24,22 @@ class Feedbox extends React.Component {
     .then(data => {
       this.setState({
         tweets: data.tweets,
-        message: data.message,
-        username: data.username,
-        id: data.id,
       });
       console.log('data', data)
     })
   }
 
   render() {
-    const { tweets, username, message, id } = this.state;
+    const { tweets } = this.state;
 
     return (
       <React.Fragment>
         <div className="col-9 feed-box border border-primary rounded shadow">
         <Tweetbox />
-          {tweets.map(() => {
+          {tweets.map(tweet => {
             return (
               <div className="feedbox mt-4">
-              <Tweet id={id} message={message} username={username} />
+              <Tweet id={tweet.id} message={tweet.message} username={tweet.username} />
               </div>
             )
           })}
