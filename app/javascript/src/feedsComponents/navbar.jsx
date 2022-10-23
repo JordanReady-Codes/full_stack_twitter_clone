@@ -12,14 +12,12 @@ class Navbar extends React.Component {
     };
 
     this.getUsername = this.getUsername.bind(this);
-    this.toggleOpen = this.toggleOpen.bind(this);
+    this.logout = this.logout.bind(this);
   }
    
   componentDidMount() {
     this.getUsername();
   }
-
-  toggleOpen = () => this.setState({ isOpen: !this.state.isOpen });
 
   getUsername() {
     fetch('/api/authenticated', safeCredentials({
@@ -29,6 +27,16 @@ class Navbar extends React.Component {
     .then(data => {
       this.setState({ 
         username: data.username });
+    })
+  }
+
+  logout() {
+    fetch('/api/sessions', safeCredentials({
+      method: 'DELETE',
+    }))
+    .then(handleErrors)
+    .then(data => {
+      window.location.href = '/';
     })
   }
 
@@ -53,22 +61,10 @@ class Navbar extends React.Component {
                 </span>
               </div>
             </div>
-            <ul className="nav navbar-nav ms-2">
-              <li className="dropdown">
-                <a href="#" onClick={this.toggleOpen} className="dropdown-toggle text-decoration-none" data-toggle="dropdown" role="button" aria-expanded="false"><span id="{props.username}-icon" className=''>{username}</span></a>
-                <ul className="dropdown-menu row" role="menu">
-                  <li ><a href="#" className="username">{username}</a></li>
-                  <li role="presentation" className="divider"></li>
-                  <li ><a href="#">Lists</a></li>
-                  <li role="presentation" className="divider"></li>
-                  <li ><a href="#">Help</a></li>
-                  <li ><a href="#">Keyboard shortcuts</a></li>
-                  <li role="presentation" className="divider"></li>
-                  <li ><a href="#">Settings</a></li>
-                  <li ><a id="log-out" href="#">Log out</a></li>
-                </ul>
-              </li>
-            </ul>
+            <div className="nav navbar-nav ms-2 d-flex flex-row">
+              <li className='d-inline p-2 fw-bold'>Signed in as:<span className='d-inline p-2 text-primary fw-bold'>{username}</span></li>
+              <button onClick={this.logout} className='btn btn-danger'>Logout</button>
+            </div>
           </div>
       </nav>
       

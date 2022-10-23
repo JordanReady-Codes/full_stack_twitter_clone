@@ -12,7 +12,7 @@ function TrendsCard() {
             <ul className="list-group">
                 <li><a href="#" className='text-decoration-none ms-2'>#Bootstrap</a></li>
                 <li><a href="#" className='text-decoration-none ms-2'>#Ruby</a></li>
-                <li><a href="#" className='text-decoration-none ms-2'>#foobarbaz</a></li>
+                <li><a href="#" className='text-decoration-none ms-2'>#Lauren</a></li>
                 <li><a href="#" className='text-decoration-none ms-2'>#rails</a></li>
                 <li><a href="#" className='text-decoration-none ms-2'>#API</a></li>
             </ul>

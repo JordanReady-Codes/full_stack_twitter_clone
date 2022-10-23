@@ -16,10 +16,6 @@ class SignUpBox extends React.Component {
 
     }
 
-    componentDidMount() {
-        this.setState({email: '', username: '', password: ''});
-    }
-
     handleChange = (e) => {
         const value = e.target.value;
         switch (e.target.name) {
@@ -53,10 +49,9 @@ class SignUpBox extends React.Component {
         .then(data => {
             if (data.success) {
                 console.log('success');
-                this.createSession();
             }
             else {
-                throw new Error('Invalid username or password');
+                this.createSession();
             }
         })
         .catch(error => {

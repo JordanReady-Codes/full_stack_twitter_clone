@@ -1,5 +1,5 @@
 import React from 'react'
-import { safeCredentialsFormData, handleErrors } from '../utils/fetchHelper';
+import { safeCredentials, safeCredentialsFormData, handleErrors } from '../utils/fetchHelper';
 
 
 class Tweetbox extends React.Component {
@@ -59,7 +59,7 @@ class Tweetbox extends React.Component {
     render() {
       
       return (
-          <div className="tweet-box border border-primary rounded shadow mt-2">
+          <div className="tweet-box border border-primary rounded shadow mt-2 mb-5">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                   <textarea className="form-control"  rows="3" name="message" value={this.message} onChange={this.handleChange} placeholder="What's happening?" ></textarea>
