@@ -25,7 +25,6 @@ class Feedbox extends React.Component {
       this.setState({
         tweets: data.tweets,
       });
-      console.log('data', data)
     })
   }
 

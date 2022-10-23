@@ -48,7 +48,7 @@ class Tweetbox extends React.Component {
       }))
         .then(handleErrors)
         .then(data => {
-          console.log('data', data)
+          window.location.reload();
           
         })
         .catch(error => {

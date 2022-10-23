@@ -1,20 +1,59 @@
 import React from 'react'
-
+import { safeCredentials, handleErrors } from '../utils/fetchHelper';
 
 
 class Tweet extends React.Component {
-  // set this.props to variables
   get id() {  return this.props.id; }
   get message() { return this.props.message; }
   get username() { return this.props.username; }
 
-  componentDidMount() {
-    console.log('this.props', this.props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: '',
+    }
+
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.onClick = this.onClick.bind(this);
+
   }
+
+  //fetch current user
+  componentDidMount() {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser = () => {
+    fetch('/api/authenticated', safeCredentials({
+      method: 'GET',
+    }))
+    .then(handleErrors)
+    .then(data => {
+      this.setState({
+        currentUser: data.username
+      });
+    })
+  }
+
+  // bind the deleteTweet function to the current instance of the Tweet component if the current user is the same as the user who created the tweet and the button is clicked
+  onClick = () => {
+    console.log('delete tweet');
+    if (this.state.currentUser === this.username) {
+      fetch(`/api/tweets/${this.id}`, safeCredentials({
+        method: 'DELETE',
+      }))
+      .then(handleErrors)
+      .then(data => {
+        window.location.reload();
+      })
+    }
+  }
+
+  
 
 
   render() {
-
+    if (this.state.currentUser === this.username) {
     return (
       <React.Fragment>
         <div key={this.id} id={this.id} className="tweet border border-primary rounded shadow mb-3">
@@ -27,12 +66,31 @@ class Tweet extends React.Component {
             <div className="tweet-field">
               <p className="tweet-content ps-2">{this.message}</p>
             </div>
-            <div className='delete-button btn m-2 btn-outline-danger' >Delete</div>
+            <div onClick={this.onClick} className='delete-button btn m-2 btn-outline-danger' >Delete</div>
           </div>
         </div>
       </React.Fragment>
     )
+    } else {
+      return (
+      <div key={this.id} id={this.id} className="tweet border border-primary rounded shadow mb-3">
+          <div className="tweet-content bg-light">
+            <div className="user-field">
+              <a className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{this.username}</a>
+              <br />
+              <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{this.username}</a>
+            </div>
+            <div className="tweet-field">
+              <p className="tweet-content ps-2">{this.message}</p>
+            </div>
+            <div onClick={this.onClick} className='delete-button btn m-2 btn-outline-danger d-none' >Delete</div>
+          </div>
+        </div>
+      )
+    }
   }
 }
+
+
 
 export default Tweet
