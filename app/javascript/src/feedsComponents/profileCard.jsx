@@ -7,29 +7,45 @@ class ProfileCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'user',
+            username: '',
+            tweetAmount: 0,
         };
 
         this.getUsername = this.getUsername.bind(this);
+        this.getTweetAmount = this.getTweetAmount.bind(this);
     }
 
     componentDidMount() {
         this.getUsername();
         }
 
-    getUsername() {
+    getUsername = () => {
         fetch('/api/authenticated', safeCredentials({
             method: 'GET',
         }))
         .then(handleErrors)
         .then(data => {
+            this.setState({
+                username: data.username
+            });
+            let name = data.username;
+            this.getTweetAmount(name);
+        })
+    }
+
+    getTweetAmount(username) {
+        fetch(`/api/users/${username}/tweets`, safeCredentials({
+            method: 'GET',
+        }))
+        .then(handleErrors)
+        .then(data => {
             this.setState({ 
-            username: data.username });
+            tweetAmount: data.tweets.length });
         })
         }
 
     render() {
-        const { username } = this.state;
+        const { username, tweetAmount } = this.state;
         return (
             <div className="profileCard border border-primary rounded shadow mb-3">
                 <div className="profileCard-content">
@@ -42,7 +58,7 @@ class ProfileCard extends Component {
                         <div className="col-3 d-flex justify-content-around ms-1">
                         <a href="" className='text-decoration-none text-muted'>
                             <span>Tweets<br/></span>
-                            <span className="user-stats-tweets">10</span>
+                            <span className="user-stats-tweets">{tweetAmount}</span>
                         </a>
                         </div>
                         <div className="col-4 d-flex justify-content-around">
