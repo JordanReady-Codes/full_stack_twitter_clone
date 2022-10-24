@@ -11,10 +11,13 @@ class Tweet extends React.Component {
     super(props);
     this.state = {
       currentUser: '',
+      tweets: [],
+      filter: false
     }
 
     this.getCurrentUser = this.getCurrentUser.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.handleLink = this.handleLink.bind(this);
 
   }
 
@@ -49,8 +52,20 @@ class Tweet extends React.Component {
     }
   }
 
-  
+  handleLink = () => {
+    fetch(`/api/users/${this.username}/tweets`, safeCredentials({
+      method: 'GET',
+    }))
+    .then(handleErrors)
+    .then(data => {
+      this.setState({
+        tweets: data.tweets,
+        filter: true
+      });
+      console.log(data.tweets);
 
+    })
+  }
 
   render() {
     if (this.state.currentUser === this.username) {
@@ -59,9 +74,9 @@ class Tweet extends React.Component {
         <div key={this.id} id={this.id} className="tweet border border-primary rounded shadow mb-3">
           <div className="tweet-content bg-light">
             <div className="user-field">
-              <a className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{this.username}</a>
+              <a onClick={this.handleLink} className="username text-decoration-none ps-2 text-muted fw-bold" href='#'>{this.username} </a>
               <br />
-              <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{this.username}</a>
+              <a className="screenName text-decoration-none ps-2 text-muted" href="/userFeeds">@{this.username}</a>
             </div>
             <div className="tweet-field">
               <p className="tweet-content ps-2">{this.message}</p>
@@ -71,14 +86,14 @@ class Tweet extends React.Component {
         </div>
       </React.Fragment>
     )
-    } else {
+    } if (this.state.currentUser !== this.username) {
       return (
       <div key={this.id} id={this.id} className="tweet border border-primary rounded shadow mb-3">
           <div className="tweet-content bg-light">
             <div className="user-field">
-              <a className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{this.username}</a>
+              <a onClick={this.handleLink} className="username text-decoration-none ps-2 text-muted fw-bold" href="#">{this.username}</a>
               <br />
-              <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{this.username}</a>
+              <a className="screenName text-decoration-none ps-2 text-muted" href="/userFeeds">@{this.username}</a>
             </div>
             <div className="tweet-field">
               <p className="tweet-content ps-2">{this.message}</p>
