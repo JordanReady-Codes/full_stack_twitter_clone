@@ -79,12 +79,13 @@ class Feedbox extends React.Component {
 
   render() {
     const { tweets } = this.state;
-    var btnClass = this.state.filter ? 'btn btn-primary mb-2' : 'd-none';
+    var btnClass = this.state.filter ? 'btn btn-primary my-2' : 'd-none';
+    var tweetboxClass = this.state.filter ? 'd-none' : 'tweetbox';
 
     return (
       <React.Fragment>
         <div className="col-9 feed-box border border-primary rounded shadow mb-4">
-        <Tweetbox />
+        <div className={tweetboxClass}><Tweetbox /></div>
           <button onClick={this.getTweets} id="global-feed" className={btnClass} >Global Feed</button>
           {tweets.map(tweet => {
             if (this.state.currentUser === tweet.username) {
