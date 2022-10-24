@@ -51,11 +51,7 @@ class Feedbox extends React.Component {
   onClick = (e) => {
     let tweet = e.target.closest('.tweet');
     const tweetId = tweet.id;
-    const username = tweet.key;
-    
-    console.log('delete tweet');
-    console.log(username);
-    console.log(tweetId);
+  
       fetch(`/api/tweets/${tweetId}`, safeCredentials({
         method: 'DELETE',
       }))
@@ -68,7 +64,6 @@ class Feedbox extends React.Component {
   userTweets = (e) => {
     let tweet = e.target.closest('.btn');
     const username = tweet.id;
-    console.log(username);
     
     fetch(`/api/users/${username}/tweets`, safeCredentials({
       method: 'GET',
@@ -84,12 +79,13 @@ class Feedbox extends React.Component {
 
   render() {
     const { tweets } = this.state;
+    var btnClass = this.state.filter ? 'btn btn-primary mb-2' : 'd-none';
 
     return (
       <React.Fragment>
         <div className="col-9 feed-box border border-primary rounded shadow mb-4">
         <Tweetbox />
-          <button onClick={this.getTweets} id="global-feed" className="btn btn-primary mb-2" >Global Feed</button>
+          <button onClick={this.getTweets} id="global-feed" className={btnClass} >Global Feed</button>
           {tweets.map(tweet => {
             if (this.state.currentUser === tweet.username) {
               return (
