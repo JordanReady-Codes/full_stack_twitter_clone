@@ -39,6 +39,6 @@
 yarn-debug.log*
 .yarn-integrity
 /.yarn
-.yarn
+/.yarn/*
 
 .DS_Store
