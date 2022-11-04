@@ -1,1 +1,1 @@
-import '@src/userFeedComponents/userFeed.jsx'
+import 'src/userFeedComponents/userFeed.jsx'
