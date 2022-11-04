@@ -1,1 +1,1 @@
-import '@src/feedsComponents/feeds.jsx';
+import 'src/feedsComponents/feeds.jsx';
