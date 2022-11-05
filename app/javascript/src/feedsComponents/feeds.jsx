@@ -14,7 +14,7 @@ const Feeds = () => {
       <Navbar />
       <div className="main container">
         <div className="row">
-          <div className="profile-trends col-3">
+          <div className="profile-trends col-auto col-sm-3">
             <ProfileCard />
             <TrendsCard />
           </div>

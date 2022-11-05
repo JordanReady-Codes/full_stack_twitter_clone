@@ -55,20 +55,20 @@ class ProfileCard extends Component {
                         <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{username}</a>
                     </div>
                     <div className="user-stats row m-0">
-                        <div className="col-3 d-flex justify-content-around ms-1">
+                        <div className="col-sm">
                         <a href="" className='text-decoration-none text-muted'>
                             <span>Tweets<br/></span>
                             <span className="user-stats-tweets">{tweetAmount}</span>
                         </a>
                         </div>
-                        <div className="col-4 d-flex justify-content-around">
+                        <div className="col-sm">
                         <a href="" className='text-decoration-none text-muted'>
                             <span>Following<br/></span>
                             <span className="user-stats-following">0</span>
                         </a>
                         </div>
-                        <div className="col-4 d-flex justify-content-around">
-                        <a href="" className='text-decoration-none text-muted ps-1'>
+                        <div className="col-sm">
+                        <a href="" className='text-decoration-none text-muted'>
                             <span>Followers<br/></span>
                             <span className="user-stats-followers">0</span>
                         </a>
