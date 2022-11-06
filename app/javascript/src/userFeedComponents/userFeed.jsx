@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Navbar from "../feedsComponents/navbar";
 import ProfileCard from "../feedsComponents/profileCard";
 import Feedbox from "../feedsComponents/feedbox";
+import UserFeedbox from "../userFeedComponents/userFeedbox";
 
 
 const UserFeed = () => {
@@ -14,7 +15,7 @@ const UserFeed = () => {
           <div className="profile-trends col-3">
             <ProfileCard />
           </div>
-          <Feedbox />
+          <UserFeedbox />
         </div>
       </div>
     </React.Fragment>
