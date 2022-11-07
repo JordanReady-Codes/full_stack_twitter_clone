@@ -1,4 +1,5 @@
 import React from 'react'
+import UserProfileCard from './userProfileCard'
 import { safeCredentials, handleErrors } from '../utils/fetchHelper'
 
 
@@ -15,11 +16,14 @@ class UserFeedbox extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.userTweets = this.userTweets.bind(this);
   }
-
   componentDidMount() {
-    this.getCurrentUser();
-    console.log(this.state.userProfile);
+    const userProfile = window.location.pathname.split('/')[2];
+    this.setState({
+      userProfile: userProfile
+    });
+
     this.userTweets();
+    this.getCurrentUser();
   }
 
   getCurrentUser = () => {  
@@ -47,10 +51,9 @@ class UserFeedbox extends React.Component {
       })
     }
 
-
   userTweets = () => {
-    
-    fetch(`/api/users/${this.userProfile}/tweets`, safeCredentials({
+    const userProfile = window.location.pathname.split('/')[2];
+    fetch(`/api/users/${userProfile}/tweets`, safeCredentials({
       method: 'GET',
     }))
     .then(handleErrors)
@@ -67,12 +70,13 @@ class UserFeedbox extends React.Component {
 
 
   render() {
-    const { tweets } = this.state;
+    const { tweets, userProfile } = this.state;
 
     return (
       <React.Fragment>
         <div className="col-9 feed-box border border-primary rounded shadow mb-4">
           <button onClick={this.globalFeed} id="global-feed" className='btn btn-primary my-2' >Global Feed</button>
+          <UserProfileCard username={userProfile}/>
           {tweets.map(tweet => {
             if (this.state.currentUser === tweet.username) {
               return (

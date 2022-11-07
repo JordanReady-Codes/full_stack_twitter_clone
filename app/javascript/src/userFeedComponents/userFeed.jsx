@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Navbar from "../feedsComponents/navbar";
 import ProfileCard from "../feedsComponents/profileCard";
-import Feedbox from "../feedsComponents/feedbox";
 import UserFeedbox from "../userFeedComponents/userFeedbox";
 
 

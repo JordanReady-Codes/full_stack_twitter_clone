@@ -9,7 +9,6 @@ class Feedbox extends React.Component {
     this.state = {
       tweets: [],
       currentUser: '',
-      filter: false
     };
 
     this.getTweets = this.getTweets.bind(this);
@@ -31,7 +30,6 @@ class Feedbox extends React.Component {
     .then(data => {
       this.setState({
         tweets: data.tweets,
-        filter: false
       });
     })
   }
@@ -62,19 +60,10 @@ class Feedbox extends React.Component {
     }
 
   userTweets = (e) => {
-    let tweet = e.target.closest('.btn');
-    const username = tweet.id;
+    e.preventDefault();
+    const username = e.target.id;
     
-    fetch(`/api/users/${username}/tweets`, safeCredentials({
-      method: 'GET',
-    }))
-    .then(handleErrors)
-    .then(data => {
-      this.setState({
-        tweets: data.tweets,
-        filter: true
-      });
-    })
+    window.location.href = `/users/${username}`;
   }
 
   render() {
