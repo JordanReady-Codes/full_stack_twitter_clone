@@ -75,8 +75,12 @@ class UserFeedbox extends React.Component {
     return (
       <React.Fragment>
         <div className="col-9 feed-box border border-primary rounded shadow mb-4">
-          <button onClick={this.globalFeed} id="global-feed" className='btn btn-primary my-2' >Global Feed</button>
+          <div className="mt-2">
           <UserProfileCard username={userProfile}/>
+          </div>
+          <div className='d-flex'>
+          <button onClick={this.globalFeed} id="global-feed" className='btn btn-primary mb-3' >Global Feed</button>
+          </div>
           {tweets.map(tweet => {
             if (this.state.currentUser === tweet.username) {
               return (
