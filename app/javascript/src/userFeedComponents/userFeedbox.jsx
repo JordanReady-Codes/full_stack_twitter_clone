@@ -90,7 +90,7 @@ class UserFeedbox extends React.Component {
                       <div className="user-field">
                         <button id={tweet.username} className='btn text-decoration-none border-none px-2 py-0 fw-bold'>{tweet.username}</button>
                         <br />
-                        <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{tweet.username}</a>
+                        <a className="screenName text-decoration-none ps-2 text-muted" href = {`/users/${tweet.username}`}>@{tweet.username}</a>
                       </div>
                       <div className="tweet-field">
                         <p className="tweet-content ps-2">{tweet.message}</p>
@@ -107,7 +107,7 @@ class UserFeedbox extends React.Component {
                       <div className="user-field">
                         <button id={tweet.username} className='btn text-decoration-none border-none px-2 py-0 fw-bold'>{tweet.username}</button>
                         <br />
-                        <a className="screenName text-decoration-none ps-2 text-muted" href="#">@{tweet.username}</a>
+                        <a className="screenName text-decoration-none ps-2 text-muted" href = {`/users/${tweet.username}`}>@{tweet.username}</a>
                       </div>
                       <div className="tweet-field">
                         <p className="tweet-content ps-2">{tweet.message}</p>
